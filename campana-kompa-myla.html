@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campaña Kompa · Myla — 4 Formatos de Contenido</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0d0c0e;
+    --bg-2:#141216;
+    --ink:#f4ead8;       /* crema */
+    --ink-soft:#b9b0a3;
+    --ink-faint:#7a736b;
+    --accent:#ff4517;    /* rojo/naranja saturado: "el color" */
+    --accent-2:#ff7a2f;
+    --line:#2b272d;
+    --serif:'Cormorant Garamond', Georgia, serif;
+    --sans:'Space Grotesk', system-ui, sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#000;font-family:var(--sans);color:var(--ink);-webkit-font-smoothing:antialiased}
+
+  /* Cada .page se convierte en una página/slide en Canva */
+  .page{
+    position:relative;
+    width:1280px;
+    height:720px;
+    margin:0 auto 32px;
+    background:var(--bg);
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    padding:64px 72px;
+  }
+  /* grano/gris ambiental sutil */
+  .page::before{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(120% 90% at 85% 10%, rgba(255,69,23,.10), transparent 55%),
+      radial-gradient(90% 80% at 0% 100%, rgba(255,122,47,.06), transparent 60%);
+    pointer-events:none;
+  }
+  .page > *{position:relative;z-index:1}
+
+  .eyebrow{
+    font-family:var(--sans);font-weight:500;letter-spacing:.28em;text-transform:uppercase;
+    font-size:13px;color:var(--accent);
+  }
+  .kicker{font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-faint);font-weight:500}
+  h1{font-family:var(--serif);font-weight:600;line-height:1.02;letter-spacing:-.01em}
+  h2{font-family:var(--serif);font-weight:600;line-height:1.05}
+  .lead{font-family:var(--serif);color:var(--ink-soft);font-style:italic}
+  p{color:var(--ink-soft);line-height:1.5}
+  .accent{color:var(--accent)}
+  .cream{color:var(--ink)}
+
+  /* ---------- PORTADA ---------- */
+  .cover{justify-content:space-between}
+  .cover-top{display:flex;justify-content:space-between;align-items:flex-start}
+  .cover-mark{font-family:var(--serif);font-size:22px;letter-spacing:.04em}
+  .cover-mid h1{font-size:104px}
+  .cover-mid .color-word{
+    background:linear-gradient(100deg,var(--accent),var(--accent-2));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .cover-sub{font-family:var(--serif);font-style:italic;font-size:30px;color:var(--ink-soft);margin-top:18px;max-width:780px}
+  .chips{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap}
+  .chip{
+    border:1px solid var(--line);border-radius:999px;padding:11px 22px;
+    font-size:15px;letter-spacing:.02em;color:var(--ink);background:rgba(255,255,255,.02)
+  }
+  .chip.hot{border-color:rgba(255,69,23,.5);color:var(--accent)}
+  .cover-foot{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid var(--line);padding-top:22px}
+  .cover-foot .song{font-family:var(--serif);font-size:26px}
+  .cover-foot .meta{text-align:right;font-size:14px;color:var(--ink-faint);line-height:1.7}
+
+  /* ---------- HILO CONDUCTOR ---------- */
+  .head-row{display:flex;align-items:baseline;gap:18px;margin-bottom:8px}
+  .thread h2{font-size:58px;margin:10px 0 6px}
+  .thread .lead{font-size:24px;max-width:900px;margin-bottom:30px}
+  .layers{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:6px}
+  .layer{border:1px solid var(--line);border-radius:16px;padding:22px 24px;background:var(--bg-2)}
+  .layer .n{font-family:var(--serif);font-size:34px;color:var(--accent);line-height:1}
+  .layer h3{font-family:var(--sans);font-size:17px;font-weight:600;margin:10px 0 6px;letter-spacing:.01em}
+  .layer p{font-size:14.5px}
+  .air{
+    margin-top:24px;border-left:3px solid var(--accent);padding:14px 22px;background:rgba(255,69,23,.06);border-radius:0 12px 12px 0
+  }
+  .air b{color:var(--ink)}
+  .air p{font-size:15px}
+
+  /* ---------- FORMATO ---------- */
+  .fmt-head{display:flex;justify-content:space-between;align-items:flex-start;gap:30px}
+  .fmt-id{display:flex;align-items:baseline;gap:18px}
+  .fmt-num{font-family:var(--serif);font-size:96px;line-height:.8;color:var(--accent)}
+  .fmt-name{font-family:var(--serif);font-size:46px;font-weight:600}
+  .fmt-prod{font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-faint);margin-top:8px}
+  .fmt-body{display:grid;grid-template-columns:1.05fr 1fr;gap:30px;margin-top:22px;flex:1}
+  .specs{display:flex;flex-direction:column;gap:14px}
+  .spec{display:grid;grid-template-columns:128px 1fr;gap:14px;align-items:start}
+  .spec .lbl{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);padding-top:3px}
+  .spec .val{font-size:15.5px;color:var(--ink);line-height:1.45}
+  .why{margin-top:auto;border-top:1px solid var(--line);padding-top:14px}
+  .why .lbl{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:6px}
+  .why p{font-size:14.5px;color:var(--ink-soft)}
+
+  /* medidor de color */
+  .meter{margin:4px 0 6px}
+  .meter .mhead{display:flex;justify-content:space-between;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:8px}
+  .meter .mhead b{color:var(--accent);letter-spacing:.04em}
+  .bar{height:10px;border-radius:999px;background:#231f26;overflow:hidden;border:1px solid var(--line)}
+  .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2))}
+
+  /* contenedores arrastrables */
+  .drop-title{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);margin:2px 0 12px}
+  .drops{display:grid;gap:12px}
+  .drops.vids{grid-template-columns:repeat(3,1fr)}
+  .drop{
+    border:1.5px dashed #3a343c;border-radius:14px;background:rgba(255,255,255,.015);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+    min-height:150px;padding:14px;gap:8px;transition:.2s
+  }
+  .drop .ico{font-size:22px;opacity:.5}
+  .drop .dlbl{font-size:13px;color:var(--ink);font-weight:500;line-height:1.25}
+  .drop .dhint{font-size:11.5px;color:var(--ink-faint);line-height:1.3}
+  .drop.photo{min-height:120px;border-radius:12px}
+  .photo-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+  .col-aside{display:flex;flex-direction:column}
+  .col-aside .drop-title:first-child{margin-top:0}
+
+  /* ---------- CIERRE ---------- */
+  .close{align-items:center;justify-content:center;text-align:center}
+  .close h1{font-size:84px;max-width:980px}
+  .close .sig{margin-top:34px;font-family:var(--sans);letter-spacing:.28em;text-transform:uppercase;font-size:13px;color:var(--ink-faint)}
+  .close .dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--accent);margin:0 14px;vertical-align:middle}
+
+  .pagenum{position:absolute;bottom:28px;right:36px;font-size:12px;color:var(--ink-faint);letter-spacing:.1em;z-index:2}
+  .brandtag{position:absolute;top:30px;left:72px;font-family:var(--serif);font-size:18px;letter-spacing:.05em;color:var(--ink-soft);z-index:2}
+</style>
+</head>
+<body>
+
+<!-- ============ PÁGINA 1 · PORTADA ============ -->
+<section class="page cover" data-document-role="page" data-label="Portada" data-speaker-notes="Concepto madre de la campaña del nuevo Kompa de Myla. El hilo invisible que conecta todo el contenido.">
+  <div class="cover-top">
+    <div class="cover-mark">MYLA</div>
+    <div class="eyebrow">Campaña de contenido · Nuevo Kompa</div>
+  </div>
+
+  <div class="cover-mid">
+    <div class="kicker" style="margin-bottom:18px">Concepto madre</div>
+    <h1>Myla trae <span class="color-word">color</span><br>a un mundo gris.</h1>
+    <div class="cover-sub">Un hilo invisible que conecta cada formato: el mundo es gris, y cuando ella entra, el color entra con ella.</div>
+    <div class="chips">
+      <span class="chip">El mundo es gris</span>
+      <span class="chip hot">Ella es el color</span>
+      <span class="chip">Se transmite como el aire</span>
+    </div>
+  </div>
+
+  <div class="cover-foot">
+    <div class="song">“No sé qué pasa”<span style="font-family:var(--sans);font-size:14px;color:var(--ink-faint);font-style:normal"> &nbsp;· título por confirmar</span></div>
+    <div class="meta">Kompa · ritmo bailable, nostálgico<br>Lanzamiento: 9 de julio<br>Tracción: creadores en TikTok (NW)</div>
+  </div>
+  <div class="pagenum">01</div>
+</section>
+
+<!-- ============ PÁGINA 2 · HILO CONDUCTOR ============ -->
+<section class="page thread" data-document-role="page" data-label="Hilo conductor" data-speaker-notes="El color sobre gris es el código visual que comparten los 4 formatos. Esto hace que el perfil se lea como el de un artista con dirección, no un creador probando cosas.">
+  <div class="brandtag">Myla — Kompa</div>
+  <div style="margin-top:30px">
+    <div class="head-row"><span class="eyebrow">El hilo conductor</span></div>
+    <h2>Color sobre gris.</h2>
+    <div class="lead">No son cuatro ideas. Es una sola idea respirando de cuatro maneras.</div>
+  </div>
+
+  <div class="layers">
+    <div class="layer">
+      <div class="n">01</div>
+      <h3>El mundo es gris</h3>
+      <p>El entorno está apagado. Cuando Myla entra en cuadro, el color entra con ella. Ese contraste es la firma.</p>
+    </div>
+    <div class="layer">
+      <div class="n">02</div>
+      <h3>Es transmisora</h3>
+      <p>Su color se contagia a quien toca. No lo guarda: lo reparte. Por eso el código puede saltar de ella a otros.</p>
+    </div>
+    <div class="layer">
+      <div class="n">03</div>
+      <h3>Es una elegida</h3>
+      <p>No busca el color, nació con él. La música la eligió a ella: un “factor X” anormal en la industria.</p>
+    </div>
+    <div class="layer">
+      <div class="n">04</div>
+      <h3>Cercana pero lejos</h3>
+      <p>Como un ángel que baja a la tierra e interactúa contigo, y tú quedas en shock de que se atreva a hablarte.</p>
+    </div>
+  </div>
+
+  <div class="air">
+    <p><b>La mecánica “como el aire”.</b> Como Myla es transmisora, los creadores que usan el audio replican el código de color sobre gris sin saber que son parte de algo. Se involucra a la gente de forma invisible.</p>
+  </div>
+  <div class="pagenum">02</div>
+</section>
+
+<!-- ============ PÁGINA 3 · FORMATO 1 ============ -->
+<section class="page format" data-document-role="page" data-label="Formato 1 — Full Visual" data-speaker-notes="Producción máxima. Construye el estatus aspiracional. Color como protagonista absoluto. Necesita contenedores de video Y de fotos.">
+  <div class="brandtag">Myla — Kompa</div>
+  <div class="fmt-head" style="margin-top:26px">
+    <div class="fmt-id">
+      <div class="fmt-num">01</div>
+      <div>
+        <div class="fmt-name">Full Visual</div>
+        <div class="fmt-prod">Producción máxima · estatus aspiracional</div>
+      </div>
+    </div>
+    <div style="width:300px">
+      <div class="meter">
+        <div class="mhead"><span>Carga de color</span><b>Protagonista absoluto</b></div>
+        <div class="bar"><i style="width:100%"></i></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fmt-body">
+    <div class="specs">
+      <div class="spec"><div class="lbl">Objetivo</div><div class="val">Myla como protagonista de película. Overdressed y “anormal”. La música es complementaria: el único foco es ella.</div></div>
+      <div class="spec"><div class="lbl">Tomas</div><div class="val">Contrapicado monumental desde el piso, objeto de color milimétricamente calculado que combina con el outfit (teléfono rojo → outfit rojo), planos detalle.</div></div>
+      <div class="spec"><div class="lbl">Edición</div><div class="val">Cine. Color como protagonista absoluto, todo lo demás al servicio de ella.</div></div>
+      <div class="spec"><div class="lbl">Rol</div><div class="val">Construye el estatus aspiracional de la marca.</div></div>
+      <div class="why">
+        <div class="lbl">Por qué funciona</div>
+        <p>Establece el techo de calidad del perfil. Es la imagen inalcanzable que justifica que todo lo demás exista.</p>
+      </div>
+    </div>
+
+    <div class="col-aside">
+      <div class="drop-title">Contenedores de video — arrastra referencias</div>
+      <div class="drops vids">
+        <div class="drop"><div class="ico">▥</div><div class="dlbl">Contrapicado monumental</div><div class="dhint">tipo “Staying Alive”</div></div>
+        <div class="drop"><div class="ico">▥</div><div class="dlbl">Objeto de color calculado</div><div class="dhint">objeto = outfit</div></div>
+        <div class="drop"><div class="ico">▥</div><div class="dlbl">Plano detalle / textura</div><div class="dhint">lujo, materia, piel</div></div>
+      </div>
+      <div class="drop-title">Contenedores de foto — tomas específicas</div>
+      <div class="photo-row">
+        <div class="drop photo"><div class="ico">▢</div><div class="dlbl">Retrato editorial</div></div>
+        <div class="drop photo"><div class="ico">▢</div><div class="dlbl">Objeto + outfit</div></div>
+        <div class="drop photo"><div class="ico">▢</div><div class="dlbl">Silueta / ambiente</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="pagenum">03</div>
+</section>
+
+<!-- ============ PÁGINA 4 · FORMATO 2 ============ -->
+<section class="page format" data-document-role="page" data-label="Formato 2 — Lipsync construido" data-speaker-notes="Producción alta. Posiciona el audio. Es la referencia de cómo los creadores usan la canción. Color como acento fuerte.">
+  <div class="brandtag">Myla — Kompa</div>
+  <div class="fmt-head" style="margin-top:26px">
+    <div class="fmt-id">
+      <div class="fmt-num">02</div>
+      <div>
+        <div class="fmt-name">Lipsync construido</div>
+        <div class="fmt-prod">Producción alta · posiciona el audio</div>
+      </div>
+    </div>
+    <div style="width:300px">
+      <div class="meter">
+        <div class="mhead"><span>Carga de color</span><b>Acento fuerte</b></div>
+        <div class="bar"><i style="width:72%"></i></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fmt-body">
+    <div class="specs">
+      <div class="spec"><div class="lbl">Objetivo</div><div class="val">Protagonismo total a la canción. Lipsync bien hecho, llamativo, que dé ganas de replicarlo.</div></div>
+      <div class="spec"><div class="lbl">Tomas</div><div class="val">Multitoma dinámico con cambios de ángulo para retención, planos cerrados, subtítulos llamativos.</div></div>
+      <div class="spec"><div class="lbl">Edición</div><div class="val">Ritmo alto al corte. Color como acento fuerte que marca los beats.</div></div>
+      <div class="spec"><div class="lbl">Rol</div><div class="val">Posiciona el audio. Es la referencia de cómo usan la canción los creadores.</div></div>
+      <div class="why">
+        <div class="lbl">Por qué funciona</div>
+        <p>Le enseña al algoritmo y a los creadores cómo se “baila” el audio. Convierte la canción en un formato replicable.</p>
+      </div>
+    </div>
+
+    <div class="col-aside">
+      <div class="drop-title">Contenedores de video — arrastra referencias</div>
+      <div class="drops vids">
+        <div class="drop"><div class="ico">▥</div><div class="dlbl">Multitoma / cambios de ángulo</div><div class="dhint">retención</div></div>
+        <div class="drop"><div class="ico">▥</div><div class="dlbl">Plano cerrado lipsync</div><div class="dhint">cara + actitud</div></div>
+        <div class="drop"><div class="ico">▥</div><div class="dlbl">Estilo de subtítulos</div><div class="dhint">tipografía llamativa</div></div>
+      </div>
+      <div style="margin-top:18px;border:1px solid var(--line);border-radius:14px;padding:18px 20px;background:var(--bg-2)">
+        <div class="lbl" style="font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:8px">Pauta para creadores</div>
+        <p style="font-size:14px">Este formato es la plantilla pública: lo que los creadores (NW) deben sentir que pueden imitar con el audio del Kompa.</p>
+      </div>
+    </div>
+  </div>
+  <div class="pagenum">04</div>
+</section>
+
+<!-- ============ PÁGINA 5 · FORMATO 3 ============ -->
+<section class="page format" data-document-role="page" data-label="Formato 3 — Storytelling" data-speaker-notes="Producción media. Humaniza a la elegida con su propia voz. Genera el cercana pero lejos. Color sutil, vive en la iluminación.">
+  <div class="brandtag">Myla — Kompa</div>
+  <div class="fmt-head" style="margin-top:26px">
+    <div class="fmt-id">
+      <div class="fmt-num">03</div>
+      <div>
+        <div class="fmt-name">Storytelling</div>
+        <div class="fmt-prod">Producción media · humaniza a la elegida</div>
+      </div>
+    </div>
+    <div style="width:300px">
+      <div class="meter">
+        <div class="mhead"><span>Carga de color</span><b>Sutil — en la luz</b></div>
+        <div class="bar"><i style="width:42%"></i></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fmt-body">
+    <div class="specs">
+      <div class="spec"><div class="lbl">Objetivo</div><div class="val">Myla hablando a cámara, grabada desde celular (o cámara que se vea orgánica), con su propia voz.</div></div>
+      <div class="spec"><div class="lbl">Tomas</div><div class="val">Frontal cercana, gesto natural. Se siente captada, no posada.</div></div>
+      <div class="spec"><div class="lbl">Edición</div><div class="val">Pesada / dopamínica encima de lo crudo. 30% autenticidad bruta + 70% producción. Color sutil que vive en la iluminación.</div></div>
+      <div class="spec"><div class="lbl">Rol</div><div class="val">Humaniza a la elegida con su propia voz. Genera el “cercana pero lejos”.</div></div>
+      <div class="why">
+        <div class="lbl">Por qué funciona</div>
+        <p>Rompe la distancia justa para que el público se enganche emocionalmente sin perder el aura. Aquí nace el vínculo.</p>
+      </div>
+    </div>
+
+    <div class="col-aside">
+      <div class="drop-title">Contenedores de video — arrastra referencias</div>
+      <div class="drops vids">
+        <div class="drop"><div class="ico">▥</div><div class="dlbl">Habla a cámara</div><div class="dhint">celular, orgánico</div></div>
+        <div class="drop"><div class="ico">▥</div><div class="dlbl">Estilo de edición dopamínica</div><div class="dhint">70% producción</div></div>
+        <div class="drop"><div class="ico">▥</div><div class="dlbl">Iluminación con color</div><div class="dhint">el color en la luz</div></div>
+      </div>
+      <div style="margin-top:18px;border-left:3px solid var(--accent);padding:14px 20px;background:rgba(255,69,23,.06);border-radius:0 12px 12px 0">
+        <p style="font-size:14px"><b style="color:var(--ink)">Equilibrio 30/70.</b> Lo crudo da verdad; la edición da estatus. Ninguno solo: siempre los dos.</p>
+      </div>
+    </div>
+  </div>
+  <div class="pagenum">05</div>
+</section>
+
+<!-- ============ PÁGINA 6 · FORMATO 4 ============ -->
+<section class="page format" data-document-role="page" data-label="Formato 4 — Orgánico crudo" data-speaker-notes="Producción mínima. Volumen para salir del shadowban y romper la distancia. Es el que más se publica. Color apenas un guiño: ella encendida en entorno apagado.">
+  <div class="brandtag">Myla — Kompa</div>
+  <div class="fmt-head" style="margin-top:26px">
+    <div class="fmt-id">
+      <div class="fmt-num">04</div>
+      <div>
+        <div class="fmt-name">Orgánico crudo</div>
+        <div class="fmt-prod">Producción mínima · volumen y cercanía</div>
+      </div>
+    </div>
+    <div style="width:300px">
+      <div class="meter">
+        <div class="mhead"><span>Carga de color</span><b>Apenas un guiño</b></div>
+        <div class="bar"><i style="width:18%"></i></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fmt-body">
+    <div class="specs">
+      <div class="spec"><div class="lbl">Objetivo</div><div class="val">Lo más natural posible. Lipsync casual o grabada desde lejos cantando. Cero sensación de producción.</div></div>
+      <div class="spec"><div class="lbl">Tomas</div><div class="val">Espontáneas, desde lejos o casuales. Como si alguien la captara sin avisar.</div></div>
+      <div class="spec"><div class="lbl">Edición</div><div class="val">Mínima. Color apenas un guiño: ella encendida en un entorno apagado.</div></div>
+      <div class="spec"><div class="lbl">Rol</div><div class="val">Volumen para salir del shadowban + rompe la distancia para que no sea solo imagen inalcanzable. Es el que más se publica.</div></div>
+      <div class="why">
+        <div class="lbl">Por qué funciona</div>
+        <p>El volumen reactiva el alcance; la naturalidad la hace humana. Es el motor diario que sostiene a los otros tres.</p>
+      </div>
+    </div>
+
+    <div class="col-aside">
+      <div class="drop-title">Contenedores de video — arrastra referencias</div>
+      <div class="drops vids">
+        <div class="drop"><div class="ico">▥</div><div class="dlbl">Lipsync casual</div><div class="dhint">sin producción</div></div>
+        <div class="drop"><div class="ico">▥</div><div class="dlbl">Cantando de lejos</div><div class="dhint">captada, espontánea</div></div>
+        <div class="drop"><div class="ico">▥</div><div class="dlbl">Guiño de color</div><div class="dhint">ella encendida</div></div>
+      </div>
+      <div style="margin-top:18px;border:1px solid var(--line);border-radius:14px;padding:18px 20px;background:var(--bg-2)">
+        <div class="lbl" style="font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:8px">Nota estratégica · shadowban</div>
+        <p style="font-size:14px">El Para Ti cayó a 0.6%. Publicar volumen mezclando alto impacto con crudo. Si en 1–2 semanas no despega, evaluar cambio de cuenta — el audio del Kompa es independiente, no se pierde la tracción de los creadores.</p>
+      </div>
+    </div>
+  </div>
+  <div class="pagenum">06</div>
+</section>
+
+<!-- ============ PÁGINA 7 · CIERRE ============ -->
+<section class="page close" data-document-role="page" data-label="Cierre" data-speaker-notes="Los 4 formatos van conectados por el hilo de color, no independientes. Un perfil que comparte código se ve como el de un artista con dirección.">
+  <div class="eyebrow" style="margin-bottom:30px">Cuatro formatos · un solo hilo</div>
+  <h1>El perfil no muestra cuatro mundos.<br>Muestra <span class="color-word" style="background:linear-gradient(100deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent">un mundo a color</span><br>en medio del gris.</h1>
+  <div class="sig">Mundo gris <span class="dot"></span> Ella es color <span class="dot"></span> Se transmite como el aire</div>
+  <div class="pagenum">07</div>
+</section>
+
+</body>
+</html>
